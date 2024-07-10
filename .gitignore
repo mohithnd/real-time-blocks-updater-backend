@@ -1,0 +1,5 @@
+bun.lockb
+package-lock.json
+.env
+
+node_modules/
