@@ -1,8 +1,13 @@
 const blocksData = {};
 
+let users = 0;
+
 function blocksHandler(io) {
   io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
+
+    users++;
+    io.emit("users", { users });
 
     io.emit("load", { id: socket.id, blocksData });
 
@@ -15,6 +20,9 @@ function blocksHandler(io) {
 
     socket.on("disconnect", () => {
       console.log(`User Disconnected: ${socket.id}`);
+
+      users--;
+      io.emit("users", { users });
     });
   });
 }
